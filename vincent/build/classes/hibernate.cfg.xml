@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+<session-factory>
+
+	<!-- 数据库连接信息 -->
+	<property name="dialect">
+		org.hibernate.dialect.MySQL5InnoDBDialect
+	</property>
+
+	<!-- 显示SQL语句 -->
+	<property name="show_sql">true</property>
+	<!-- 自动建表 -->
+	<property name="hbm2ddl.auto">update</property>
+
+	<!-- 导入映射文件 -->
+	<mapping resource="hxl/insist/oa/domain/Account.hbm.xml" />
+	<mapping resource="hxl/insist/oa/domain/Opus.hbm.xml" />
+	<mapping resource="hxl/insist/oa/domain/Team.hbm.xml" />
+	<mapping resource="hxl/insist/oa/domain/Academy.hbm.xml" />
+	<mapping resource="hxl/insist/oa/domain/Project.hbm.xml" />
+	<mapping resource="hxl/insist/oa/domain/RecommendedLevel.hbm.xml" />
+	<mapping resource="hxl/insist/oa/domain/WorkType.hbm.xml" />
+	<mapping resource="hxl/insist/oa/domain/Reviewer.hbm.xml" />
+	<mapping resource="hxl/insist/oa/domain/Review.hbm.xml" />
+
+</session-factory>
+
+</hibernate-configuration>

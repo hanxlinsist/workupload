@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 配置为开发模式，好处是改完配置文件以后立即生效，不用重新发布应用 <constant name="struts.devMode" value="true" 
+	<constant name="struts.devMode" value="true" />
+		/> -->
+	<!-- 把扩展名配置为action -->
+	<constant name="struts.action.extension" value="action" />
+	<!-- 把主题配置为simple -->
+	<constant name="struts.ui.theme" value="simple" />
+
+	<!-- 默认的包，拦截器的声明，公共的Action -->
+	<package name="default" namespace="/" extends="json-default">
+		<interceptors>
+			<!-- 声明拦截器 -->
+			<interceptor name="checkPrivilege"
+				class="hxl.insist.oa.util.CheckPrivilegeInterceptor"></interceptor>
+
+			<!-- 重新定义默认的拦截器栈 -->
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="checkPrivilege"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<!-- 全局的Result配置 -->
+		<global-results>
+			<result name="errMsg">/index.jsp</result>
+			<result name="loginUI">/WEB-INF/jsp/systemPortalAdminAction/loginUI.jsp
+			</result>
+			<result name="siteUrl">/WEB-INF/jsp/siteUrl.jsp</result>
+		</global-results>
+
+		<!-- 登录相关功能 -->
+		<action name="system_*" class="systemPortalAdminAction" method="{1}"></action>
+
+		<!-- 修改密码功能 -->
+		<action name="modiftPwd_*" class="modifyPasswordAction" method="{1}">
+			<result name="modifyPwdUI">/WEB-INF/jsp/systemPortalAdminAction/modifyPwdUI.jsp
+			</result>
+		</action>
+
+		<!-- 初始化数据 -->
+		<action name="init" class="initAction" method="init"></action>
+		
+	</package>
+
+	<!-- 学校功能的Action -->
+	<package name="school" namespace="/school" extends="default">
+
+		<!-- 学校角色的功能列表 -->
+		<action name="functionlist_*" class="functionListAction"
+			method="{1}">
+			<result name="schoolFunctionList">/WEB-INF/jsp/functionListAction/schoolFunctionList.jsp
+			</result>
+		</action>
+
+		<!-- 导出Excel相关功能 -->
+		<action name="excelinfo_*" class="exportExcelAction" method="{1}">
+			<result name="excelBeanInfo">/WEB-INF/jsp/exportExcelAction/excelBeanInfo.jsp
+			</result>
+		</action>
+
+		<!-- 帐户管理 -->
+		<action name="account_*" class="accountAction" method="{1}">
+			<result name="assignAccountUI">/WEB-INF/jsp/accountAction/assignAccountUI.jsp
+			</result>
+			<result name="modifySystemStatusUI">/WEB-INF/jsp/accountAction/modifySystemStatusUI.jsp
+			</result>
+			<result name="toAccountList" type="redirectAction">accountList_listUI</result>
+			<result name="toFunctionList" type="redirectAction">functionlist_schoolList
+			</result>
+			<result name="toTeamInfoAdmin" type="redirectAction">team_teamInfoAdminList
+			</result>
+		</action>
+
+		<!-- 团队信息管理 -->
+		<action name="team_*" class="schoolTeamInfoAction" method="{1}">
+			<result name="teamInfoAdminList">/WEB-INF/jsp/teamInfoAction/list.jsp</result>
+			<result name="success" type="json">
+            	<param name="root">resultObj</param>
+            </result>
+		</action>
+		
+		<!-- 帐户列表显示相关Action -->
+		<action name="accountList_*" class="schoolAccountListAction" method="{1}">
+			<result name="accountList">/WEB-INF/jsp/accountAction/list.jsp</result>
+			<result name="success" type="json">
+            	<param name="root">resultObj</param>
+            </result>
+            <result name="academy" type="json">
+            	<param name="root">recommendedLevelBean</param>
+            </result>
+		</action>
+
+		<!-- 作品信息管理 -->
+		<action name="opus_*" class="schoolOpusInfoAction" method="{1}">
+			<result name="opusInfoAdminList">/WEB-INF/jsp/opusInfoAction/list.jsp</result>
+			<result name="reviewDetails">/WEB-INF/jsp/opusInfoAction/reviewDetails.jsp</result>
+			<result name="success" type="json">
+            	<param name="root">resultObj</param>
+            </result>
+            <result name="recommendedLevel" type="json">
+            	<param name="root">recommendedLevelBean</param>
+            </result>
+		</action>
+	</package>
+
+	<!-- 团队功能的Action -->
+	<package name="team" namespace="/team" extends="default">
+
+		<!-- 团队角色的功能列表 -->
+		<action name="functionlist_*" class="functionListAction"
+			method="{1}">
+			<result name="teamFunctionList">/WEB-INF/jsp/functionListAction/teamFunctionList.jsp
+			</result>
+		</action>
+
+		<!-- 团队管理 -->
+		<action name="team_*" class="teamAdminAction" method="{1}">
+			<result name="complementInformationUI">/WEB-INF/jsp/teamAdminAction/complementInformationUI.jsp
+			</result>
+			<result name="toFunctionList" type="redirectAction">functionlist_teamList
+			</result>
+		</action>
+
+		<!-- 作品管理 -->
+		<action name="opus_*" class="opusAdminAction" method="{1}">
+			<result name="opusStatusUI">/WEB-INF/jsp/opusAdminAction/opusStatusUI.jsp
+			</result>
+			<result name="complementOpusInfoUI">/WEB-INF/jsp/opusAdminAction/complementOpusInfoUI.jsp
+			</result>
+			<result name="toFunctionList" type="redirectAction">functionlist_teamList
+			</result>
+		</action>
+	</package>
+
+	<!-- 评审功能的Action -->
+	<package name="reviewer" namespace="/reviewer" extends="default">
+		<!-- 评审角色的功能列表 -->
+		<action name="functionlist_*" class="functionListAction"
+			method="{1}">
+			<result name="reviewerFunctionList">/WEB-INF/jsp/functionListAction/reviewerFunctionList.jsp
+			</result>
+		</action>
+
+		<!-- 作品评审管理与评审信息完善 -->
+		<action name="opus_*" class="reviewerAdminAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/reviewerAdminAction/list.jsp</result>
+			<result name="remarkScoreUI">/WEB-INF/jsp/reviewerAdminAction/remarkScoreUI.jsp</result>
+			<result name="complementInformationUI">/WEB-INF/jsp/reviewerAdminAction/complementInformationUI.jsp</result>
+			<result name="toFunctionList" type="redirectAction">functionlist_reviewerList</result>
+			<result name="success" type="json">
+            	<param name="root">resultObj</param>
+            </result>
+		</action>
+		
+		<!-- 保存作品分数 -->
+		<action name="review" class="reviewAction" method="saveOpusScore"></action>
+	</package>
+
+	<!-- root用户相关功能的Action -->
+	<package name="root" namespace="/root" extends="default">
+		<!-- root角色的功能列表 -->
+		<action name="functionlist_*" class="functionListAction"
+			method="{1}">
+			<result name="rootFunctionList">/WEB-INF/jsp/functionListAction/rootFunctionList.jsp
+			</result>
+		</action>
+
+		<!-- 创建项目 -->
+		<action name="project_*" class="rootAction" method="{1}">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="projectCreateUI">/WEB-INF/jsp/rootAction/createProjectUI.jsp</result>
+			<result name="toFunctionList" type="redirectAction">functionlist_rootList</result>
+		</action>
+		
+		<!-- 账号管理 -->
+		<action name="account_*" class="rootManageAccountAction" method="{1}">
+			<result name="toAccountList" type="redirectAction">account_list</result>
+			<result name="accountList">/WEB-INF/jsp/rootAction/accountList.jsp</result>
+			<result name="levelModifyRecord">/WEB-INF/jsp/rootAction/levelModifyRecord.jsp</result>
+            <result name="success" type="json">
+            	<param name="root">resultObj</param>
+            </result>
+		</action>
+		
+		<!-- 修改作品推荐级别相关Action -->
+		<action name="opus_*" class="rootOpusModifyRecordAction" method="{1}">
+			<result name="levelModifyRecord">/WEB-INF/jsp/rootAction/levelModifyRecord.jsp</result>
+            <result name="success" type="json">
+            	<param name="root">resultObj</param>
+            </result>
+            <result name="recommendedLevel" type="json">
+            	<param name="root">recommendedLevelBean</param>
+            </result>
+		</action>
+		
+		<!-- 评审数据分析相关Action -->
+		<action name="reviewerAnalysis_*" class="rootReviewerDataAnalysisAction" method="{1}">
+			<result name="reviewerList">/WEB-INF/jsp/rootAction/reviewerList.jsp</result>
+			<result name="success" type="json">
+            	<param name="root">resultObj</param>
+            </result>
+		</action>
+		
+		<!-- 数据分析 -->
+		<action name="data_*" class="dataAnalysisAction" method="{1}">
+			<result name="analysisUI">/WEB-INF/jsp/DataAnalysisAction/dataAnalysis.jsp</result>
+			<result type="json" />
+		</action>
+	</package>
+</struts>

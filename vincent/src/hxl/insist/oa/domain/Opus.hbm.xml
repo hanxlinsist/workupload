@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hxl.insist.oa.domain">
+
+	<class name="Opus" table="xlinsist_opus">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="opusName" />
+		<property name="opusCategory" />
+		<property name="bdAddress" />
+		<property name="opusSummary" type="text" length="65536" />
+		<property name="totalScore" />
+		<property name="appraisedNumber" />
+		<property name="averageScore" />
+		<property name="level" />
+		<property name="academy" />
+		<property name="appraisedAdvice" type="text" length="65536" />
+		<property name="levelModifyRecord" />
+		
+		<!-- The column attribute is used to set the column name in the parent table WorkType. -->
+		<many-to-one name="project" column="project" class="Project"></many-to-one>
+		
+	</class>
+	
+</hibernate-mapping>

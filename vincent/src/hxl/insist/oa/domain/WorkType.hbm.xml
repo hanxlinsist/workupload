@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hxl.insist.oa.domain">
+
+	<class name="WorkType" table="xlinsist_worktype">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="name" />
+		
+		<!-- The column attribute is used to set the column name in the parent table WorkType. -->
+		<many-to-one name="project" column="project" class="Project"></many-to-one>
+	</class>
+	
+</hibernate-mapping>

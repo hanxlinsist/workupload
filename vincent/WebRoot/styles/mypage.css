@@ -1,0 +1,49 @@
+body{ margin:0px; padding:0px; font-size:12px; font-family:"微软雅黑"; color:#666}
+
+.content{ margin:0 auto; width:1000px; height:auto; overflow:hidden; background-color:#F0F0F0}
+
+h1,h2,h3,h4,h5{ margin:0px; padding:0px; font-size:12px; font-weight:normal}
+
+.title{ text-align:center; height:50px; line-height:50px; font-size:16px; color:#865A35}
+.red_color{ color:#C00}
+.baise_color{ color:#fff}
+.heise_color{ color:#000}
+
+
+.btn_a{ color:#865A35; text-decoration:none}
+
+.h10{ clear:both; height:10px}
+
+.div_top{ height:50px; background-color:#46B6C1; margin:0 auto; width:980px}
+.liebiao{ margin:0 auto; width:980px; padding-bottom:20px}
+
+.table_top{height:28px; line-height:28px;text-align:center; background-color:#46B6C1; color:#fff; border-left:solid 1px #fff; border-bottom:solid 1px #fff}
+
+.table_td{ line-height:26px; height:26px; border-left:solid 1px #fff; border-bottom:solid 1px #fff}
+
+.input-button {
+	border:0px none;
+	color:White;
+	cursor:pointer;
+	background:url('../images/BackgroundButton.gif') no-repeat;
+}
+
+a:LINK {
+	color: black;
+	text-decoration: none;
+}
+
+a:VISITED {
+	color: black;
+	text-decoration: none;
+}
+
+a:HOVER {
+	color: red;
+	text-decoration: underline;
+}
+
+a:ACTIVE {
+	color: black;
+	text-decoration: none;
+}

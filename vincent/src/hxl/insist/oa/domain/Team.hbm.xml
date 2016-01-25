@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hxl.insist.oa.domain">
+
+	<class name="Team" table="xlinsist_team">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="captainName" />
+		<property name="captainPhone" />
+		<property name="captainMail" />
+		<property name="conductTeacherName" />
+		<property name="academy" />
+		<property name="teamCategory" />
+		<property name="teamMemberName" />
+		<property name="captainId" />
+		
+		<!-- opus属性，本类与Opus的一对一。
+			采用基于外键的一对一映射，本方有外键。 -->
+		<many-to-one name="opus" class="Opus" column="opusId" unique="true"></many-to-one>
+		
+		<!-- account属性，本类与Account的一对一。
+			采用基于外键的一对一映射，本方有外键。 -->
+		<many-to-one name="account" class="Account" column="accountId" unique="true"></many-to-one>
+		
+		<!-- The column attribute is used to set the column name in the parent table Team. -->
+		<many-to-one name="project" column="project" class="Project"></many-to-one>
+	</class>
+	
+</hibernate-mapping>

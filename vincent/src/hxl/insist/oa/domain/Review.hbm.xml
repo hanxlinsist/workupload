@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hxl.insist.oa.domain">
+
+	<class name="Review" table="xlinsist_review">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="score" />
+		<property name="isRecommend" />
+		
+		<!-- The column attribute is used to set the column name in the parent table WorkType. -->
+		<many-to-one name="project" column="project" class="Project"></many-to-one>
+		
+		<!-- 
+			The <many-to-one> element is used to set the relationship between Reviwer and Account entities. 
+			The name attribute is set to the defined variable in the parent class, in our case it is Account.
+			The column attribute is used to set the column name in the parent table Reviwer which is set to unique 
+			so that only one Reviwer object can be associated with an Account object.
+		 -->
+		<many-to-one name="opus" column="opus_id" class="Opus" not-null="true"/>
+		
+		<many-to-one name="reviewer" column="reviewer_id" class="Reviewer" not-null="true"/>
+		
+	</class>
+	
+</hibernate-mapping>

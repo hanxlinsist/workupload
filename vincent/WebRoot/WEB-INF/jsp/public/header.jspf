@@ -1,0 +1,20 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+<img src="<%=rootPath %>/images/banner.jpg" />
+	<table cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+             <td style="height:26px; line-height:26px; text-indent:50px">
+             	欢迎您:<s:label value="%{#session.account.userName}"></s:label>
+             </td>
+             <td width="200" align="center">
+             	<a href="<%=rootPath %>/<%=session.getAttribute("functionListURL") %>.action" class="btn_a">主菜单</a>
+            	 &nbsp;&nbsp;|&nbsp;&nbsp;
+            	 <a href="<%=rootPath %>/system_logout.action" class="btn_a">退出系统</a>
+             </td>
+          </tr>
+         
+          <tr>
+            <td colspan="2" style="border-bottom:solid 1px #933"></td>
+          </tr>
+       </table>
+       
+       <div class="h10"></div>
